@@ -6,6 +6,7 @@ const keywords = require("../ava/questions");
 const cors = require("cors");
 
 app.use(cors());
+
 router.get("/", async (req, res) => {
   try {
     res.status(200).send(data);
@@ -17,7 +18,7 @@ router.get("/", async (req, res) => {
 router.get("/ava/:question", async (req, res) => {
   const question = req.params.question.split(" "); //aca recibe la pregunta spliteada
   try {
-    res.status(200).send(JSON.parse(question));
+    res.status(200).send(JSON.stringify(question));
   } catch (e) {
     res.status(500).send(e);
   }
