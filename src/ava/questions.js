@@ -1,1 +1,1 @@
-const keywords = ["ticket", "desk"]; // dos kywords
+module.exports = { keywords: ['ticket', 'desk'] }; // dos kywords
