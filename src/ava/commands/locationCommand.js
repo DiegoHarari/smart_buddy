@@ -7,7 +7,6 @@ class LocationCommand {
 
   parse(phrase) {
     const objectIndex = phrase.indexOf(object.keyword);
-    console.log(objectIndex);
     if (objectIndex > -1) {
       const actionIndex = phrase.indexOf(action.keyword);
       if (actionIndex > -1) {

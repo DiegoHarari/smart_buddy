@@ -6,7 +6,6 @@ class TransportCommand {
   constructor() {}
 
   parse(phrase) {
-    console.log("parsing");
     const objectIndex = phrase.indexOf(object.keyword);
     if (objectIndex > -1) {
       const actionIndex = phrase.indexOf(action.keyword);
