@@ -1,9 +1,7 @@
-const TicketCommand = require('./ticketCommand');
+const TicketCommand = require("./ticketCommand");
 
 function executeCommand(matches, question) {
   const ticketCommand = new TicketCommand();
-  console.log(matches);
-  console.log(question);
   if (matches.indexOf(ticketCommand.getKeyword()) > -1) {
     const ticketCommand = new TicketCommand();
     const response = ticketCommand.parse(question);
@@ -13,5 +11,5 @@ function executeCommand(matches, question) {
 }
 
 module.exports = {
-  executeCommand,
+  executeCommand
 };
