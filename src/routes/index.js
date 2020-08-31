@@ -24,16 +24,16 @@ router.get('/ava/:question', async (req, res) => {
     console.log(matches);
     if (matches.length > 0) {
       //si se matcheo algun keyword pasarselo al commandhandler para uqe ejecute la accion.
-      const response = commandHandler.executeCommand(matches, question);
+      const response = await commandHandler.executeCommand(matches, question);
 
       if (response.success) {
         res.status(200).send(JSON.stringify(response));
       } else {
         res.status(500).send('Unable to parse the request');
       }
+    } else {
+      res.status(200).send(JSON.stringify(question));
     }
-
-    res.status(200).send(JSON.stringify(question));
   } catch (e) {
     res.status(500).send(e);
   }

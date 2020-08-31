@@ -1,16 +1,17 @@
-const object = { keyword: 'take', command: 'OBJECT' };
-const action = { keyword: 'create', command: 'ACTION' };
-const connector = { keywords: ['to', 'for', 'because'] };
+const object = { keyword: ['this', 'these'], command: 'OBJECT' };
+const action = { keyword: 'take', command: 'ACTION' };
+const connector = { keywords: 'to' };
 // este commando deberia responder cuando alguien pide llevar un objeto: take this receipt to Valeria
+// e.g. take this receipt to Valeria
 class TransportCommand {
   constructor() {}
 
   parse(phrase) {
     console.log('parsing');
-    const objectIndex = phrase.indexOf(object.keyword);
-    console.log(objectIndex);
-    if (objectIndex > -1) {
-      const actionIndex = phrase.indexOf(action.keyword);
+    const actionIndex = phrase.indexOf(action.keyword);
+    
+    if (actionIndex.length > -1) {
+      const connectorIndex = phrase.indexOf(connector.keyword);
       if (actionIndex > -1) {
         const index = phrase.indexOf(object.keyword) + object.keyword.length;
         console.log(index);

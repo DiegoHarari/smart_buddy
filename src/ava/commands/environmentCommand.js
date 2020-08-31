@@ -1,31 +1,32 @@
-const object = { keyword: 'check', command: 'OBJECT' };
-const action = { keyword: 'create', command: 'ACTION' };
+const object = { keyword: 'office', command: 'OBJECT' };
+const action = { keyword: ['status', 'check', 'how'], command: 'ACTION' };
 const connector = { keywords: ['to', 'for', 'because'] };
 // este commando deberia responder cuando alguien pide chequear la oficina: check the office status
-class LocationCommand {
+class EnvironmentCommand {
   constructor() {}
 
-  parse(phrase) {
+  async parse(phrase) {
     console.log('parsing');
     const objectIndex = phrase.indexOf(object.keyword);
     console.log(objectIndex);
     if (objectIndex > -1) {
-      const actionIndex = phrase.indexOf(action.keyword);
-      if (actionIndex > -1) {
-        const index = phrase.indexOf(object.keyword) + object.keyword.length;
-        console.log(index);
-        console.log(phrase.length);
-        const content = phrase.substring(index, phrase.length);
-        console.log(content);
-        return { success: true, message: `ticket was created with content "${content.trim()}"` };
+      console.log(action.keyword);
+      const actionMatch = action.keyword.filter((w) => phrase.includes(w));
+      console.log(actionMatch);
+      if (actionMatch.length > 0) {
+        const temperature = `The temperature in the office is 24 degrees.`;
+        const lights = `70% of the lights are on.`;
+        const doors = `All doors are locked.`;
+
+        return { success: true, message: `Temperature: ${temperature} - Lights: ${lights} - doors: ${doors}` };
       }
     }
     return { success: false, message: "Couldn't parse" };
   }
 
   getKeyword() {
-    return 'ticket';
+    return 'office';
   }
 }
 
-module.exports = TicketCommand;
+module.exports = EnvironmentCommand;

@@ -1,11 +1,11 @@
 const object = { keyword: 'ticket', command: 'OBJECT' };
 const action = { keyword: 'create', command: 'ACTION' };
 const connector = { keywords: ['to', 'for', 'because'] };
-
+// este commando deberia responder cuando alguien pide crear un ticket
 class TicketCommand {
   constructor() {}
 
-  parse(phrase) {
+  async parse(phrase) {
     console.log('parsing');
     const objectIndex = phrase.indexOf(object.keyword);
     console.log(objectIndex);
