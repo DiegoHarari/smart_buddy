@@ -1,23 +1,24 @@
-const object = { keyword: "office", command: "OBJECT" };
-const action = { keyword: ["status", "check", "how"], command: "ACTION" };
-const connector = { keywords: ["to", "for", "because"] };
-// este commando deberia responder cuando alguien pide chequear la oficina: check the office status
+const object = { keyword: 'office', command: 'OBJECT' };
+const action = { keyword: ['status', 'check', 'how'], command: 'ACTION' };
 class EnvironmentCommand {
   constructor() {}
+
+  randomInt(min, max) {
+    return min + Math.floor((max - min) * Math.random());
+  }
 
   async parse(phrase) {
     const objectIndex = phrase.indexOf(object.keyword);
     if (objectIndex > -1) {
-      console.log(action.keyword);
       const actionMatch = action.keyword.filter((w) => phrase.includes(w));
       if (actionMatch.length > 0) {
-        const temperature = `The temperature in the office is 24 degrees.`;
-        const lights = `70% of the lights are on.`;
+        const temperature = `The temperature in the office is ${this.randomInt(22, 28)} degrees.`;
+        const lights = `${this.randomInt(30, 90)}% of the lights are on.`;
         const doors = `All doors are locked.`;
 
         return {
           success: true,
-          message: `Temperature: ${temperature} - Lights: ${lights} - doors: ${doors}`
+          message: `Temperature: ${temperature} - Lights: ${lights} - doors: ${doors}`,
         };
       }
     }
@@ -25,7 +26,7 @@ class EnvironmentCommand {
   }
 
   getKeyword() {
-    return "office";
+    return 'office';
   }
 }
 

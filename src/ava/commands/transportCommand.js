@@ -1,22 +1,32 @@
-const object = { keyword: ["this", "these"], command: "OBJECT" };
-const action = { keyword: "take", command: "ACTION" };
-const connector = { keywords: "to" };
-// este commando deberia responder cuando alguien pide llevar un objeto: take this receipt to Valeria
-// e.g. take this receipt to Valeria
+const action = { keyword: 'take', command: 'ACTION' };
+const connector = { keyword: 'to' };
+
 class TransportCommand {
   constructor() {}
+
+  randomInt(min, max) {
+    return min + Math.floor((max - min) * Math.random());
+  }
 
   parse(phrase) {
     const actionIndex = phrase.indexOf(action.keyword);
 
-    if (actionIndex.length > -1) {
+    if (actionIndex > -1) {
       const connectorIndex = phrase.indexOf(connector.keyword);
-      if (actionIndex > -1) {
-        const index = phrase.indexOf(object.keyword) + object.keyword.length;
-        const content = phrase.substring(index, phrase.length);
+
+      if (connectorIndex > -1) {
+        const deliveryTo = phrase.substring(connectorIndex + connector.keyword.length, phrase.length);
+
+        const objectToDeliver = phrase.substring(
+          actionIndex + action.keyword.length,
+          phrase.length - deliveryTo.length - connector.keyword.length
+        );
+
+        const estimatedTime = this.randomInt(5, 20);
+
         return {
           success: true,
-          message: `ticket was created with content "${content.trim()}"`
+          message: `I will deliver ${objectToDeliver} to ${deliveryTo}. Estimated time ${estimatedTime} minutes`,
         };
       }
     }
@@ -24,8 +34,8 @@ class TransportCommand {
   }
 
   getKeyword() {
-    return "ticket";
+    return action.keyword;
   }
 }
 
-module.exports = TicketCommand;
+module.exports = TransportCommand;
