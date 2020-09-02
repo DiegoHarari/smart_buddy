@@ -1,7 +1,5 @@
 const object = { keyword: "find", command: "OBJECT" };
-const action = { keyword: "create", command: "ACTION" };
-const connector = { keywords: ["to", "for", "because"] };
-// este commando deberia responder cuando alguien pregunta donde se encuentra una persona o lugar: where is the bathroom, where is Sebastian Ordiz
+
 class LocationCommand {
   constructor() {}
 
